@@ -439,4 +439,6 @@ config QMI_ENCDEC_DEBUG
 	  library. This will log the information regarding the element
 	  and message being encoded & decoded.
 
+source "lib/fonts/Kconfig"
+
 endmenu
