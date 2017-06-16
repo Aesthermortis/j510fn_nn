@@ -81,3 +81,5 @@ obj-$(CONFIG_QCOM_EARLY_RANDOM)	+= early_random.o
 obj-$(CONFIG_MSM_PACMAN)        += msm_pacman.o
 
 obj-y		+= samsung/
+
+obj-$(CONFIG_STATE_NOTIFIER)	+= state_notifier.o
