@@ -25,7 +25,7 @@
 	interrupt-parent = <&intc>;
 
 	chosen {
-		bootargs = "sched_enable_hmp=1";
+		bootargs = "boot_cpus=0,1,2,3 sched_enable_hmp=1";
 	};
 
 	aliases {
@@ -369,13 +369,18 @@
 		#clock-cells = <1>;
 		qcom,speed0-bin-v0 =
 			<          0 0>,
-			<  200000000 1>,
-			<  400000000 2>,
-			<  533333000 3>,
-			<  800000000 4>,
-			<  998400000 5>,
-			< 1094400000 6>,
-			< 1190400000 7>;
+			<  400000000 1>,
+			<  533333000 2>,
+			<  800000000 3>,
+			<  998400000 4>,
+			< 1094400000 5>,
+			< 1190400000 6>,
+			< 1363200000 7>,
+			< 1248000000 8>,
+			< 1401600000 9>,
+			< 1497600000 10>,
+			< 1632000000 11>,
+			< 1881600000 12>;
 	};
 
 	cpubw: qcom,cpubw@0 {
@@ -385,10 +390,11 @@
 		qcom,src-dst-ports = <1 512>;
 		qcom,active-only;
 		qcom,bw-tbl =
-			<  762 /* 100 MHz */>,
+			<  763 /* 100 MHz */>,
 			< 1525 /* 200 MHz */>,
-			< 3051 /* 400 MHz */>,
-			< 4066 /* 533 MHz */>;
+			< 3052 /* 400 MHz */>,
+			< 4066 /* 533 MHz */>,
+			< 4580 /* 600 MHz */>;
 		qcom,ab-percent = < 30 >;
 	};
 
@@ -403,10 +409,10 @@
 			target-dev = <&cpubw>;
 			cpu-to-dev-map =
 				 <  400000  762>,
-				 <  800000  1525>,
+				 <  533330  1525>,
 				 <  998400  3051>,
-				 < 1094400  3051>,
-				 < 1190400  4066>;
+				 < 1190400  4066>,
+				 < 1881600  4580>;
 		};
 	};
 
@@ -420,13 +426,18 @@
 		clock-names = "cpu0_clk", "cpu1_clk",
 				"cpu2_clk", "cpu3_clk";
 		qcom,cpufreq-table =
-			 <  200000 >,
 			 <  400000 >,
 			 <  533330 >,
 			 <  800000 >,
 			 <  998400 >,
 			 < 1094400 >,
-			 < 1190400 >;
+			 < 1190400 >,
+			 < 1248000 >,
+			 < 1363200 >,
+			 < 1401600 >,
+			 < 1497600 >,
+			 < 1632000 >,
+			 < 1881600 >;
 	};
 
 	qcom,sps {
@@ -681,7 +692,7 @@
 			 <&clock_gcc clk_gcc_sdcc1_apps_clk>;
 		clock-names = "iface_clk", "core_clk";
 
-		qcom,clk-rates = <400000 25000000 50000000 100000000 177770000>;
+		qcom,clk-rates = <400000 25000000 50000000 100000000 200000000>;
 		qcom,bus-speed-mode = "HS200_1p8v", "DDR_1p8v";
 
 		status = "disabled";
@@ -1476,7 +1487,7 @@
 		clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
 			 <&clock_gcc clk_gcc_blsp1_qup2_i2c_apps_clk>;
 		clock-names = "iface_clk", "core_clk";
-		qcom,clk-freq-out = <100000>;
+		qcom,clk-freq-out = <400000>;
 		qcom,clk-freq-in  = <19200000>;
 		pinctrl-names = "i2c_active", "i2c_sleep";
 		pinctrl-0 = <&i2c_0_active>;
@@ -1497,7 +1508,7 @@
 		      <0x7884000 0x23000>;
 		interrupt-names = "qup_irq", "bam_irq";
 		interrupts = <0 95 0>, <0 238 0>;
-		qcom,clk-freq-out = <100000>;
+		qcom,clk-freq-out = <400000>;
 		qcom,clk-freq-in  = <19200000>;
 		clock-names = "iface_clk", "core_clk";
 		clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
@@ -2250,4 +2261,3 @@
 		/* If you need to add new key type, add it this position */
 	};
 };
-
